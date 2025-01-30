@@ -1,4 +1,4 @@
-package de.safenow.application.service.seed
+package de.safenow.seed
 
 import de.safenow.application.service.EmployeeService
 import de.safenow.domain.Employee

@@ -1,24 +1,24 @@
 package de.safenow.application.service
 
-import de.safenow.adapter.out.EmployeeRepositoryAdapter
+import de.safenow.adapter.out.EmployeePersistenceAdapter
 import de.safenow.domain.Employee
 import de.safenow.port.`in`.GetEmployeeUsecase
 import de.safenow.port.`in`.SaveEmployeeUsecase
-import de.safenow.port.out.EmployeeRepositoryOutputPort
+import de.safenow.port.out.EmployeePersistenceOutputPort
 import jakarta.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
 class EmployeeService() : SaveEmployeeUsecase, GetEmployeeUsecase {
 
-    private val employeeRepositoryOutputPort: EmployeeRepositoryOutputPort = EmployeeRepositoryAdapter()
+    private val employeePersistenceOutputPort: EmployeePersistenceOutputPort = EmployeePersistenceAdapter()
 
     override fun save(employee: Employee) =
-        employeeRepositoryOutputPort.save(employee)
+        employeePersistenceOutputPort.save(employee)
 
     override fun get(id: Int): Employee? =
-        employeeRepositoryOutputPort.getById(id)
+        employeePersistenceOutputPort.getById(id)
 
     override fun getAll(): List<Employee> =
-        employeeRepositoryOutputPort.getAll()
+        employeePersistenceOutputPort.getAll()
 
 }
