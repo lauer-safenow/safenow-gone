@@ -1,9 +1,9 @@
-package de.safenow.adapter.out
+package de.safenow.adapter.output
 
 import de.safenow.domain.Employee
-import de.safenow.port.out.EmployeePersistenceOutputPort
+import de.safenow.port.output.PersistenceOutputPort
 
-class EmployeePersistenceAdapter() : EmployeePersistenceOutputPort {
+class EmployeePersistenceAdapter() : PersistenceOutputPort<Employee> {
 
     private val db: MutableMap<Int, Employee> = mutableMapOf()
     private var nextId: Int = 0

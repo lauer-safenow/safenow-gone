@@ -2,9 +2,6 @@
 .gradle/
 build/
 
-#jetclient
-.jetclient/
-
 # Eclipse
 .project
 .classpath
