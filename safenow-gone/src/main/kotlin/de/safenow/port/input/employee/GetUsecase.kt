@@ -1,8 +1,8 @@
 package de.safenow.port.input.employee
 
-interface GetUsecase<T> {
+interface GetUsecase<ID, TYPE> {
 
-    fun get(id: Int): T?
-    fun getAll(): List<T>
+    fun get(id: ID): TYPE?
+    fun getAll(): List<TYPE>
 
 }

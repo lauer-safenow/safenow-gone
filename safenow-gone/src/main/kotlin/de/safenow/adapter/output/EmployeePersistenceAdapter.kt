@@ -3,7 +3,7 @@ package de.safenow.adapter.output
 import de.safenow.domain.Employee
 import de.safenow.port.output.PersistenceOutputPort
 
-class EmployeePersistenceAdapter() : PersistenceOutputPort<Employee> {
+class EmployeePersistenceAdapter() : PersistenceOutputPort<Int, Employee> {
 
     private val db: MutableMap<Int, Employee> = mutableMapOf()
     private var nextId: Int = 0
