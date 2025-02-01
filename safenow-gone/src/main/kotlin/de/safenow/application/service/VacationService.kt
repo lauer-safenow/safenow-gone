@@ -2,13 +2,15 @@ package de.safenow.application.service
 
 import de.safenow.adapter.output.VacationsPersistenceAdapter
 import de.safenow.domain.Vacation
-import de.safenow.port.input.employee.GetUsecase
-import de.safenow.port.input.employee.SaveUsecase
+import de.safenow.port.input.employee.GetEmployeeUsecase
+import de.safenow.port.input.employee.SaveEmployeeUsecase
+import de.safenow.port.input.vacation.GetVacationUsecase
+import de.safenow.port.input.vacation.SaveVacationUsecase
 import jakarta.enterprise.context.ApplicationScoped
 import java.util.*
 
 @ApplicationScoped
-class VacationService() : SaveUsecase<Vacation>, GetUsecase<UUID, Vacation> {
+class VacationService() : SaveVacationUsecase, GetVacationUsecase {
 
     private val persistenceOutputPort = VacationsPersistenceAdapter()
 

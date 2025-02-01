@@ -4,7 +4,7 @@ import de.safenow.domain.Vacation
 import de.safenow.port.output.PersistenceOutputPort
 import java.util.*
 
-class VacationsPersistenceAdapter() : PersistenceOutputPort<UUID,Vacation> {
+class VacationsPersistenceAdapter() : PersistenceOutputPort<UUID, Vacation> {
 
     private val db: MutableMap<UUID, Vacation> = mutableMapOf()
 

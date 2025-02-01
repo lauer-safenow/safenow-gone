@@ -2,12 +2,12 @@ package de.safenow.application.service
 
 import de.safenow.adapter.output.EmployeePersistenceAdapter
 import de.safenow.domain.Employee
-import de.safenow.port.input.employee.GetUsecase
-import de.safenow.port.input.employee.SaveUsecase
+import de.safenow.port.input.employee.GetEmployeeUsecase
+import de.safenow.port.input.employee.SaveEmployeeUsecase
 import jakarta.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
-class EmployeeService() : SaveUsecase<Employee>, GetUsecase<Int,Employee> {
+class EmployeeService() : SaveEmployeeUsecase , GetEmployeeUsecase {
 
     private val persistenceOutputPort = EmployeePersistenceAdapter()
 
