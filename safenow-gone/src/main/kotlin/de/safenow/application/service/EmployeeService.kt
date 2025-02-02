@@ -9,8 +9,7 @@ class EmployeeService() : SaveEmployeeUsecase, GetEmployeeUsecase {
 
     private val persistenceOutputPort = EmployeePersistenceAdapter()
 
-    override fun save(e: Employee) =
-        persistenceOutputPort.save(e)
+    override fun save(e: Employee): Employee = persistenceOutputPort.save(e)
 
     override fun get(id: Int): Employee? =
         persistenceOutputPort.getById(id)

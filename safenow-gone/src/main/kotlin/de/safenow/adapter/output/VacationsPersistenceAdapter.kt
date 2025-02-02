@@ -7,8 +7,8 @@ import java.util.*
 
 class VacationsPersistenceAdapter() : PersistenceOutputPort<UUID, Vacation> {
 
-    override fun save(v: Vacation) {
-        Database.saveVacation(v)
+    override fun save(vacation: Vacation) : Vacation{
+       return Database.saveVacation(vacation)
     }
 
     override fun getAll(): List<Vacation> = Database.getVacations()

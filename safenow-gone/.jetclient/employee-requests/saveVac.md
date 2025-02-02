@@ -9,15 +9,7 @@ id = '93fe4e0a-d44a-4bf1-9236-519bc19ec01f'
 type = 'JSON'
 raw = '''
 {
-    "from": "2025-02-02",
-    "to": "2025-02-02",
-    "takingEmployee": {
-      "id": 0,
-      "name": "Developer"
-    },
-    "standInEmployee": {
-      "id": 1,
-      "name": "Manager"
-    }
+    "from": "2025-02-05",
+    "to": "2025-02-02"
   }'''
 ```

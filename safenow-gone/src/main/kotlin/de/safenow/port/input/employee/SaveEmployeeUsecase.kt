@@ -4,5 +4,5 @@ import de.safenow.domain.Employee
 
 interface SaveEmployeeUsecase {
 
-    fun save(e: Employee)
+    fun save(employee: Employee) : Employee
 }

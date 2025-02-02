@@ -4,5 +4,5 @@ import de.safenow.domain.Vacation
 
 interface SaveVacationUsecase {
 
-    fun save(e: Vacation): () -> Unit
+    fun save(vacation: Vacation) : Vacation
 }

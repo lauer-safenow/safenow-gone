@@ -23,11 +23,8 @@ class VacationController() {
     fun getOne(id: UUID): Vacation? = vacations.get(id)
 
     @POST
-    fun saveOne(v: Vacation) {
-        println("Saving ??")
-        println("Saving $v")
-//        val vac = v.copy()
-//        vacations.save(vac)
+    fun saveOne(vacation: Vacation) {
+        vacations.save(vacation)
     }
 
 }

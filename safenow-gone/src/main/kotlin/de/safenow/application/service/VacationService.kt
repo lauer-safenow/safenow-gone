@@ -10,13 +10,7 @@ class VacationService() : SaveVacationUsecase, GetVacationUsecase {
 
     private val persistenceOutputPort = VacationsPersistenceAdapter()
 
-//    private val employeeService = EmployeeService()
-
-    override fun save(v: Vacation) = {
-//        val takingEmployee: Employee = v.employee
-//        val standinEmployee: Employee = v.standIn
-        persistenceOutputPort.save(v)
-    }
+    override fun save(vacation: Vacation): Vacation  = persistenceOutputPort.save(vacation)
 
     override fun get(id: UUID): Vacation? = persistenceOutputPort.getById(id)
 
