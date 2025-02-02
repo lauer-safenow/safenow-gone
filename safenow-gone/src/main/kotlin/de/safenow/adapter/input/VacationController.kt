@@ -23,8 +23,6 @@ class VacationController() {
     fun getOne(id: UUID): Vacation? = vacations.get(id)
 
     @POST
-    fun saveOne(vacation: Vacation) {
-        vacations.save(vacation)
-    }
+    fun saveOne(vacation: Vacation) : Vacation = vacations.save(vacation)
 
 }
