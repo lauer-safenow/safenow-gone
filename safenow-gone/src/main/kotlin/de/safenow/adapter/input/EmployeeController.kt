@@ -2,7 +2,6 @@ package de.safenow.adapter.input
 
 import de.safenow.application.service.EmployeeService
 import de.safenow.domain.Employee
-import jakarta.inject.Inject
 import jakarta.ws.rs.GET
 import jakarta.ws.rs.POST
 import jakarta.ws.rs.Path
@@ -10,8 +9,7 @@ import jakarta.ws.rs.Path
 @Path("/employees")
 class EmployeeController() {
 
-    @Inject
-    lateinit var employeeService: EmployeeService
+    private val employeeService = EmployeeService()
 
     @GET
     fun getAll(): List<Employee> = employeeService.getAll()

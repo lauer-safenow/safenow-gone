@@ -1,20 +1,18 @@
 package de.safenow.adapter.output
 
+import de.safenow.db.Database
 import de.safenow.domain.Vacation
 import de.safenow.port.output.PersistenceOutputPort
 import java.util.*
 
 class VacationsPersistenceAdapter() : PersistenceOutputPort<UUID, Vacation> {
 
-    private val db: MutableMap<UUID, Vacation> = mutableMapOf()
-
-
     override fun save(v: Vacation) {
-        db[v.id] = v.copy()
+        Database.saveVacation(v)
     }
 
-    override fun getAll(): List<Vacation> = db.values.toList()
-    override fun getById(id: UUID): Vacation? = db[id]
+    override fun getAll(): List<Vacation> = Database.getVacations()
+    override fun getById(id: UUID): Vacation? = Database.getVacation(id)
 
 
 }
