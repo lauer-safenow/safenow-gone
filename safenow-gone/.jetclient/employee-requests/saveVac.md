@@ -11,13 +11,7 @@ raw = '''
 {
   "from": "2025-01-02",
   "to": "2025-02-02",
-  "takingEmployee": {
-    "id": 0,
-    "name": "Developer"
-  },
-  "standInEmployee": {
-    "id": 1,
-    "name": "Manager"
-  }
+  "takingEmployeeId": 70,
+  "standInEmployeeId": 1
 }'''
 ```

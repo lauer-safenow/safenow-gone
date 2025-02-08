@@ -15,14 +15,14 @@ class Database {
         val vacationTable: MutableMap<UUID, Vacation> = mutableMapOf()
 
         init {
-            val savedE1 = saveEmployee(Employee(name = "Developer"))
-            val savedE2 = saveEmployee(Employee(name = "Manager"))
+            val savedE1 = saveEmployee(Employee(name = "Developer", email = "dev@b.c"))
+            val savedE2 = saveEmployee(Employee(name = "Manager", email = "manager@b.c"))
 
             val vacation = Vacation(
                 from = LocalDate.now(),
                 to = LocalDate.now(),
                 takingEmployee = savedE1,
-                standInEmployee = savedE2
+                standInEmployee = savedE2,
             )
 
             val vacation2 = Vacation(
