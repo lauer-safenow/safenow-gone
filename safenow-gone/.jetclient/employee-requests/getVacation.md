@@ -1,5 +1,5 @@
 ```toml
-name = 'getVac'
+name = 'getVacation'
 method = 'GET'
 url = 'http://localhost:8080/vacations/'
 sortWeight = 4000000

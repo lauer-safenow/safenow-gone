@@ -9,7 +9,7 @@ data class Vacation(
     val to: LocalDate,
     val takingEmployee: Employee,
     val standInEmployee: Employee,
-    val status: VacationStatus? = VacationStatus.PENDING
+    val status: VacationStatus = VacationStatus.PENDING
 )
 
 enum class VacationStatus {

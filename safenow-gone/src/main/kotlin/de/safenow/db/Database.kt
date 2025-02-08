@@ -49,7 +49,8 @@ class Database {
         fun getEmployees(): List<Employee> = employeeTable.values.toList()
 
         fun saveVacation(vacation: Vacation): Vacation {
-            val copy = vacation.copy(id = UUID.randomUUID())
+            val id = vacation.id ?: UUID.randomUUID()
+            val copy = vacation.copy(id = id)
             vacationTable[copy.id!!] = copy
             return copy
         }

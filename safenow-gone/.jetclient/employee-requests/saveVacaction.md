@@ -1,5 +1,5 @@
 ```toml
-name = 'saveVac'
+name = 'saveVacaction'
 method = 'POST'
 url = 'http://localhost:8080/vacations'
 sortWeight = 3000000
@@ -11,7 +11,8 @@ raw = '''
 {
   "from": "2025-01-02",
   "to": "2025-02-02",
-  "takingEmployeeId": 70,
-  "standInEmployeeId": 1
+  "takingEmployeeId": 0,
+  "standInEmployeeId": 1,
+  status: "APPROVED"
 }'''
 ```
