@@ -19,13 +19,13 @@ class Database {
             val savedE1 = saveEmployee(Employee(name = "Developer", email = "dev@b.c"))
             val savedE2 = saveEmployee(Employee(name = "Manager", email = "manager@b.c"))
 
-            val vacationE1 = Vacation(
-                id= UUID.fromString("452c9a70-9b1d-4514-8bdb-9ab72f55a6e1"),
-                from = LocalDate.now().minusDays(2),
-                to = LocalDate.now().plusDays(5),
-                takingEmployee = savedE2,
-                standInEmployee = savedE1,
-            )
+//            val vacationE1 = Vacation(
+//                id= UUID.fromString("452c9a70-9b1d-4514-8bdb-9ab72f55a6e1"),
+//                from = LocalDate.now().minusDays(2),
+//                to = LocalDate.now().plusDays(5),
+//                takingEmployee = savedE2,
+//                standInEmployee = savedE1,
+//            )
 
             val vacation = Vacation(
                 id= UUID.fromString("452c9a70-9b1d-4514-8bdb-9ab72f55a6e1"),
@@ -44,7 +44,7 @@ class Database {
 
 
 
-            savedE2.addAbsence(vacationE1)
+//            savedE2.addAbsence(vacationE1)
             savedE1.addAbsence(vacation)
             savedE1.addAbsence(vacation2)
 

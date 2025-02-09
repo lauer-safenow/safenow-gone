@@ -19,6 +19,16 @@ class EmployeeController() {
     fun getOne(id: Int): Employee? = employeeService.get(id)
 
     @POST
-    fun saveOne(e: Employee) : Employee  = employeeService.save(e)
+    fun saveOne(e: EmployeeDTO): Employee = employeeService.save(
+        Employee(
+            name = e.name,
+            email = e.email
+        )
+    )
+
+    data class EmployeeDTO(
+        val name: String,
+        val email: String
+    )
 
 }
