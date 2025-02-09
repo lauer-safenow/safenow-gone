@@ -25,7 +25,7 @@ class VacationController() {
 
     @GET
     @Path("/{id}")
-    fun getOne(id: UUID): Vacation? = vacations.get(id)
+    fun getOne(id: UUID): Vacation? = vacations.get(id) ?: throw IllegalArgumentException("Vacation not found")
 
     @PATCH
     @Path("/{id}")
@@ -56,6 +56,7 @@ class VacationController() {
             status = dto.status
         )
     }
+
 
     data class VacationDTO(
         val id: UUID? = null,

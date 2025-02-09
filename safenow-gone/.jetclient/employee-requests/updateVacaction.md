@@ -13,6 +13,6 @@ value = '452c9a70-9b1d-4514-8bdb-9ab72f55a6e1'
 type = 'JSON'
 raw = '''
 {
-  "status": "REJECTED"
+  "status": "APPROVED"
 }'''
 ```
