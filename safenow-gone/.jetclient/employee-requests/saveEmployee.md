@@ -10,6 +10,6 @@ type = 'JSON'
 raw = '''
 {
   "name" : "Dings Bums",
-  email: "dings@bums.jetzt"
+  email: "dings@bums.jett1"
 }'''
 ```

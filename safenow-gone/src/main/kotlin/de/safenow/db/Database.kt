@@ -28,7 +28,7 @@ class Database {
 //            )
 
             val vacation = Vacation(
-                id= UUID.fromString("452c9a70-9b1d-4514-8bdb-9ab72f55a6e1"),
+                id = UUID.fromString("452c9a70-9b1d-4514-8bdb-9ab72f55a6e1"),
                 from = LocalDate.now(),
                 to = LocalDate.now(),
                 takingEmployee = savedE1,
@@ -41,7 +41,6 @@ class Database {
                 takingEmployee = savedE1,
                 standInEmployee = savedE2
             )
-
 
 
 //            savedE2.addAbsence(vacationE1)
@@ -63,6 +62,13 @@ class Database {
 
         fun getEmployee(id: Int): Employee? = employeeTable[id]
         fun getEmployees(): List<Employee> = employeeTable.values.toList()
+        fun getEmployeeByEmail(email: String): Employee? =
+            employeeTable.values.let { e ->
+                e.find {
+                    it.email == email
+                }
+            }
+
 
         fun saveVacation(vacation: Vacation): Vacation {
             val id = vacation.id ?: UUID.randomUUID()

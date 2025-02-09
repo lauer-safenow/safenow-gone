@@ -9,12 +9,20 @@ class EmployeeService() : SaveEmployeeUsecase, GetEmployeeUsecase {
 
     private val persistenceOutputPort = EmployeePersistenceAdapter()
 
-    override fun save(e: Employee): Employee = persistenceOutputPort.save(e)
+    override fun save(e: Employee): Employee {
+        // Check if employee with email already exists
+        getByEMail(e.email)?.let { throw IllegalArgumentException("Employee with email ${e.email} already exists") }
+        return persistenceOutputPort.save(e)
+    }
 
     override fun get(id: Int): Employee? =
         persistenceOutputPort.getById(id)
 
     override fun getAll(): List<Employee> =
         persistenceOutputPort.getAll()
+
+    override fun getByEMail(email: String): Employee? =
+        persistenceOutputPort.getByEmail(email)
+
 
 }

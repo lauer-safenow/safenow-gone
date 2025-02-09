@@ -12,6 +12,8 @@ class EmployeePersistenceAdapter() : PersistenceOutputPort<Int, Employee> {
 
     override fun getAll(): List<Employee> = Database.getEmployees()
     override fun getById(id: Int): Employee? = Database.getEmployee(id)
+    // TODO Improve this
+    fun getByEmail(email: String): Employee? = Database.getEmployeeByEmail(email)
 
 
 }

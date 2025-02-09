@@ -6,5 +6,6 @@ interface GetEmployeeUsecase {
 
     fun get(id: Int): Employee?
     fun getAll(): List<Employee>
+    fun getByEMail(email: String): Employee?
 
 }
