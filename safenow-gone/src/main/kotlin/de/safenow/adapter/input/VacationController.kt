@@ -5,8 +5,8 @@ import de.safenow.application.service.VacationService
 import de.safenow.domain.Vacation
 import de.safenow.domain.VacationStatus
 import jakarta.ws.rs.GET
+import jakarta.ws.rs.PATCH
 import jakarta.ws.rs.POST
-import jakarta.ws.rs.PUT
 import jakarta.ws.rs.Path
 import java.time.LocalDate
 import java.util.*
@@ -27,12 +27,16 @@ class VacationController() {
     @Path("/{id}")
     fun getOne(id: UUID): Vacation? = vacations.get(id)
 
-    @PUT
+    @PATCH
     @Path("/{id}")
-    fun updateOne(id: UUID, vacation: VacationDTO): Vacation {
-        val v = map(vacation).copy(id = id)
-        return vacations.update(v)
+    fun updateOne(id: UUID, dto: PartialVacationUpdateDTO): Vacation {
+        val v = vacations.get(id) ?: throw IllegalArgumentException("Vacation not found")
+        return vacations.update(v, dto.status)
     }
+
+    data class PartialVacationUpdateDTO(
+        val status: VacationStatus
+    )
 
     @POST
     fun saveOne(vacation: VacationDTO): Vacation {

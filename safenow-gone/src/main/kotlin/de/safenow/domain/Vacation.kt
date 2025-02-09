@@ -17,13 +17,27 @@ enum class VacationStatus {
 }
 
 fun Vacation.approve(): Vacation {
+    this.takingEmployee.addAbsence(this)
     return this.copy(status = VacationStatus.APPROVED)
 }
 
 fun Vacation.reject(): Vacation {
+    this.takingEmployee.removeAbsence(this)
     return this.copy(status = VacationStatus.REJECTED)
 }
 
 fun Vacation.cancel(): Vacation {
+    this.takingEmployee.removeAbsence(this)
     return this.copy(status = VacationStatus.CANCELLED)
+}
+
+
+
+fun Vacation.updateStatus(status: VacationStatus) : Vacation {
+   return when(status){
+        VacationStatus.PENDING -> this
+        VacationStatus.APPROVED -> this.approve()
+        VacationStatus.REJECTED ->  this.reject()
+        VacationStatus.CANCELLED -> this.cancel()
+    }
 }

@@ -1,11 +1,11 @@
 package de.safenow.application.service
 
+
 import de.safenow.adapter.output.VacationsPersistenceAdapter
 import de.safenow.domain.Vacation
 import de.safenow.domain.VacationStatus
-import de.safenow.domain.approve
-import de.safenow.domain.cancel
-import de.safenow.domain.reject
+import de.safenow.domain.addAbsence
+import de.safenow.domain.updateStatus
 import de.safenow.port.input.vacation.GetVacationUsecase
 import de.safenow.port.input.vacation.SaveVacationUsecase
 import de.safenow.port.input.vacation.UpdateVacationUsecase
@@ -15,17 +15,13 @@ class VacationService() : SaveVacationUsecase, GetVacationUsecase, UpdateVacatio
 
     private val persistenceOutputPort = VacationsPersistenceAdapter()
 
-    override fun update(vacation: Vacation): Vacation {
-        val v = when(vacation.status){
-            VacationStatus.PENDING -> vacation
-            VacationStatus.APPROVED -> vacation.approve()
-            VacationStatus.REJECTED ->  vacation.reject()
-            VacationStatus.CANCELLED -> vacation.cancel()
-        }
+    override fun update(vacation: Vacation, status: VacationStatus): Vacation {
+        val v = vacation.updateStatus(status)
         return persistenceOutputPort.save(v)
     }
 
     override fun save(v: Vacation): Vacation  {
+        v.takingEmployee.addAbsence(v)
         return persistenceOutputPort.save(v)
     }
 
@@ -36,3 +32,5 @@ class VacationService() : SaveVacationUsecase, GetVacationUsecase, UpdateVacatio
 
 
 }
+
+

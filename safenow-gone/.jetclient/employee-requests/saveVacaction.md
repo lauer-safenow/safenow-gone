@@ -9,10 +9,10 @@ id = '93fe4e0a-d44a-4bf1-9236-519bc19ec01f'
 type = 'JSON'
 raw = '''
 {
-  "from": "2025-01-02",
-  "to": "2025-02-02",
+  "from": "2025-01-09",
+  "to": "2025-02-22",
   "takingEmployeeId": 0,
   "standInEmployeeId": 1,
-  status: "APPROVED"
+  "status": "PENDING"
 }'''
 ```

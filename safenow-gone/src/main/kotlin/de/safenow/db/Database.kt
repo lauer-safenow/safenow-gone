@@ -2,6 +2,7 @@ package de.safenow.db
 
 import de.safenow.domain.Employee
 import de.safenow.domain.Vacation
+import de.safenow.domain.addAbsence
 import java.time.LocalDate
 import java.util.*
 
@@ -19,6 +20,7 @@ class Database {
             val savedE2 = saveEmployee(Employee(name = "Manager", email = "manager@b.c"))
 
             val vacation = Vacation(
+                id= UUID.fromString("452c9a70-9b1d-4514-8bdb-9ab72f55a6e1"),
                 from = LocalDate.now(),
                 to = LocalDate.now(),
                 takingEmployee = savedE1,
@@ -31,6 +33,8 @@ class Database {
                 takingEmployee = savedE1,
                 standInEmployee = savedE2
             )
+            savedE1.addAbsence(vacation)
+            savedE1.addAbsence(vacation2)
 
             saveVacation(vacation)
             saveVacation(vacation2)
