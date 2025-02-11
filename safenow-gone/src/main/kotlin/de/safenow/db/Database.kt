@@ -29,7 +29,7 @@ class Database {
 
             val vacation = Vacation(
                 id = UUID.fromString("452c9a70-9b1d-4514-8bdb-9ab72f55a6e1"),
-                from = LocalDate.now(),
+                from = LocalDate.now().minusDays(20),
                 to = LocalDate.now(),
                 takingEmployee = savedE1,
                 standInEmployee = savedE2,
@@ -79,6 +79,12 @@ class Database {
 
         fun getVacation(id: UUID): Vacation? = vacationTable[id]
         fun getVacations(): List<Vacation> = vacationTable.values.toList()
+
+        fun getVacationsWithRange(from: LocalDate, to: LocalDate?): List<Vacation> =
+            vacationTable.values.filter {
+                it.from.isEqual(from) || it.from.isAfter(from) &&
+                        (to == null || it.to.isEqual(to) || it.to.isBefore(to)) // allow open ended range with to == null
+            }
     }
 
 

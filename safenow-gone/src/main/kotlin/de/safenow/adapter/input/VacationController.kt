@@ -1,5 +1,6 @@
 package de.safenow.adapter.input
 
+import com.aayushatharva.brotli4j.common.annotations.Local
 import de.safenow.application.service.EmployeeService
 import de.safenow.application.service.VacationService
 import de.safenow.domain.Vacation
@@ -8,6 +9,7 @@ import jakarta.ws.rs.GET
 import jakarta.ws.rs.PATCH
 import jakarta.ws.rs.POST
 import jakarta.ws.rs.Path
+import jakarta.ws.rs.QueryParam
 import java.time.LocalDate
 import java.util.*
 
@@ -18,14 +20,20 @@ class VacationController() {
     private val employeeService = EmployeeService()
 
     @GET
-    fun getAll(): List<Vacation> {
-        println("Getting all Vacations...")
-        return vacations.getAll()
+    fun get(@QueryParam("from") from: String?, @QueryParam("to") to: String?): List<Vacation> {
+        if(from == null) {
+            println("Getting all Vacations...")
+            return vacations.getAll()
+        }
+        // Default ISO Format (YYYY-MM-DD)
+        return vacations.getWithRange(LocalDate.parse(from), to?.let {LocalDate.parse(it!!)})
     }
 
     @GET
     @Path("/{id}")
-    fun getOne(id: UUID): Vacation? = vacations.get(id) ?: throw IllegalArgumentException("Vacation not found")
+    fun getOne(id: UUID): Vacation? =
+        vacations.get(id) ?: throw IllegalArgumentException("Vacation not found")
+
 
     @PATCH
     @Path("/{id}")

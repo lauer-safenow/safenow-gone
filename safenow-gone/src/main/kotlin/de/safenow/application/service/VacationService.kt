@@ -9,6 +9,7 @@ import de.safenow.domain.updateStatus
 import de.safenow.port.input.vacation.GetVacationUsecase
 import de.safenow.port.input.vacation.SaveVacationUsecase
 import de.safenow.port.input.vacation.UpdateVacationUsecase
+import java.time.LocalDate
 import java.util.*
 
 class VacationService() : SaveVacationUsecase, GetVacationUsecase, UpdateVacationUsecase {
@@ -20,7 +21,7 @@ class VacationService() : SaveVacationUsecase, GetVacationUsecase, UpdateVacatio
         return persistenceOutputPort.save(v)
     }
 
-    override fun save(v: Vacation): Vacation  {
+    override fun save(v: Vacation): Vacation {
         v.takingEmployee.addAbsence(v)
         return persistenceOutputPort.save(v)
     }
@@ -29,6 +30,9 @@ class VacationService() : SaveVacationUsecase, GetVacationUsecase, UpdateVacatio
 
     override fun getAll(): List<Vacation> = persistenceOutputPort.getAll()
 
+    override fun getWithRange(from: LocalDate, to: LocalDate?): List<Vacation> {
+        return persistenceOutputPort.getWithRange(from, to)
+    }
 
 
 }
