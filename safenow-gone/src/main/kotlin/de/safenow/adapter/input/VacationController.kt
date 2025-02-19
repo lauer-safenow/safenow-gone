@@ -1,16 +1,10 @@
 package de.safenow.adapter.input
 
-import com.aayushatharva.brotli4j.common.annotations.Local
 import de.safenow.application.service.EmployeeService
 import de.safenow.application.service.VacationService
 import de.safenow.domain.Vacation
 import de.safenow.domain.VacationStatus
-import jakarta.ws.rs.DELETE
-import jakarta.ws.rs.GET
-import jakarta.ws.rs.PATCH
-import jakarta.ws.rs.POST
-import jakarta.ws.rs.Path
-import jakarta.ws.rs.QueryParam
+import jakarta.ws.rs.*
 import java.time.LocalDate
 import java.util.*
 
@@ -25,13 +19,12 @@ class VacationController() {
     fun deleteOne(id: UUID): Boolean = vacations.delete(id)
 
     @GET
-    fun get(@QueryParam("from") from: String?, @QueryParam("to") to: String?): List<Vacation> {
-        if(from == null) {
-            println("Getting all Vacations...")
-            return vacations.getAll()
+    fun get(@QueryParam("from") from: String?, @QueryParam("to") to: String?): List<VacationDTO> {
+        if (from == null) {
+            return vacations.getAll().map { map(it) }
         }
         // Default ISO Format (YYYY-MM-DD)
-        return vacations.getWithRange(LocalDate.parse(from), to?.let {LocalDate.parse(it!!)})
+        return vacations.getWithRange(LocalDate.parse(from), to?.let { LocalDate.parse(it) }).map { map(it) }
     }
 
     @GET
@@ -64,9 +57,15 @@ class VacationController() {
             to = dto.to,
             takingEmployee = employeeService.get(dto.takingEmployeeId)
                 ?: throw IllegalArgumentException("Taking employee not found"),
-//            standInEmployee = employeeService.get(dto.standInEmployeeId)
-//                ?: throw IllegalArgumentException("Stand-in employee not found"),
-            status = dto.status
+        )
+    }
+
+    fun map(v: Vacation): VacationDTO {
+        return VacationDTO(
+            id = v.id,
+            from = v.from,
+            to = v.to,
+            takingEmployeeId = v.takingEmployee.id!!
         )
     }
 
@@ -76,8 +75,6 @@ class VacationController() {
         val from: LocalDate,
         val to: LocalDate,
         val takingEmployeeId: Int,
-//        val standInEmployeeId: Int,
-        val status: VacationStatus
     )
 
 }

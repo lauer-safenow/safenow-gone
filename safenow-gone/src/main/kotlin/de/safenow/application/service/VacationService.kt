@@ -5,6 +5,7 @@ import de.safenow.adapter.output.VacationsPersistenceAdapter
 import de.safenow.domain.Vacation
 import de.safenow.domain.VacationStatus
 import de.safenow.domain.addAbsence
+import de.safenow.domain.removeAbsence
 import de.safenow.domain.updateStatus
 import de.safenow.port.input.vacation.DeleteVacationUsecase
 import de.safenow.port.input.vacation.GetVacationUsecase
@@ -16,6 +17,7 @@ import java.util.*
 class VacationService() : SaveVacationUsecase, GetVacationUsecase, UpdateVacationUsecase, DeleteVacationUsecase {
 
     private val persistenceOutputPort = VacationsPersistenceAdapter()
+    private val employeeService = EmployeeService()
 
     override fun update(vacation: Vacation, status: VacationStatus): Vacation {
         val v = vacation.updateStatus(status)
@@ -34,7 +36,11 @@ class VacationService() : SaveVacationUsecase, GetVacationUsecase, UpdateVacatio
     override fun getWithRange(from: LocalDate, to: LocalDate?): List<Vacation> =
         persistenceOutputPort.getWithRange(from, to)
 
-    override fun delete(id: UUID): Boolean = persistenceOutputPort.delete(id)
+    override fun delete(id: UUID): Boolean {
+        val vacation = get(id) ?: return false
+        employeeService.removeAbsence(vacation.takingEmployee.id!!, vacation)
+        return persistenceOutputPort.delete(id)
+    }
 
 
 }

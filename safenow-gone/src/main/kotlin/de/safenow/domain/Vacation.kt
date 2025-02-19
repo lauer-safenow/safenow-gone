@@ -8,7 +8,6 @@ data class Vacation(
     val from: LocalDate,
     val to: LocalDate,
     val takingEmployee: Employee,
-//    val standInEmployee: Employee,
     val status: VacationStatus = VacationStatus.PENDING
 )
 

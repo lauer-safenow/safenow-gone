@@ -24,7 +24,7 @@ class EmployeeController() {
     fun getOne(id: Int): Employee? = employeeService.get(id)
 
     @POST
-    fun saveOne(e: EmployeeDTO): Employee = employeeService.save(
+    fun saveOne(e: EmployeeDTO): Employee = employeeService.saveNew(
         Employee(
             name = e.name,
             email = e.email
