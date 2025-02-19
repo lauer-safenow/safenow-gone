@@ -45,6 +45,11 @@ class Database {
         fun deleteVacation(id: UUID): Boolean = vacationTable.remove(id) != null
 
         fun saveEmployee(employee: Employee): Employee {
+            if(employee.id != null) {
+                employeeTable[employee.id] = employee.copy()
+                return employee
+            }
+
             val copy = employee.copy(id = nextIdEmployee)
             employeeTable[nextIdEmployee] = copy
             nextIdEmployee++
@@ -64,7 +69,7 @@ class Database {
 
         fun saveVacation(vacation: Vacation): Vacation {
             val id = vacation.id ?: UUID.randomUUID()
-            val copy = vacation.copy(id = id)
+            val copy = vacation.copy(id = id, takingEmployee = vacation.takingEmployee.copy())
             vacationTable[copy.id!!] = copy
             return copy
         }

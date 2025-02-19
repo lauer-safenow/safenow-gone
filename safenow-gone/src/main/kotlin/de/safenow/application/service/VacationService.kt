@@ -25,6 +25,7 @@ class VacationService() : SaveVacationUsecase, GetVacationUsecase, UpdateVacatio
     }
 
     override fun save(v: Vacation): Vacation {
+        //TODO persist the absence
         v.takingEmployee.addAbsence(v)
         return persistenceOutputPort.save(v)
     }

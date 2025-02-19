@@ -7,7 +7,7 @@ data class Vacation(
     val id: UUID? = null,
     val from: LocalDate,
     val to: LocalDate,
-    val takingEmployee: Employee,
+    val takingEmployee: Employee, // TODO use ID instead of ref here?
     val status: VacationStatus = VacationStatus.PENDING
 )
 
