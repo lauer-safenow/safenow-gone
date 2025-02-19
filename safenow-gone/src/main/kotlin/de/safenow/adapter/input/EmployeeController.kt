@@ -14,7 +14,7 @@ class EmployeeController() {
 
     @DELETE
     @Path("/{id}")
-    fun delete(id: Int): List<Employee> = employeeService.delete(id)
+    fun delete(id: Int): Boolean = employeeService.delete(id)
 
     @GET
     fun getAll(): List<Employee> = employeeService.getAll()
