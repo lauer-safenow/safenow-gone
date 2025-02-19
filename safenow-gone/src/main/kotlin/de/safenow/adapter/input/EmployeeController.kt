@@ -2,6 +2,7 @@ package de.safenow.adapter.input
 
 import de.safenow.application.service.EmployeeService
 import de.safenow.domain.Employee
+import jakarta.ws.rs.DELETE
 import jakarta.ws.rs.GET
 import jakarta.ws.rs.POST
 import jakarta.ws.rs.Path
@@ -10,6 +11,10 @@ import jakarta.ws.rs.Path
 class EmployeeController() {
 
     private val employeeService = EmployeeService()
+
+    @DELETE
+    @Path("/{id}")
+    fun delete(id: Int): List<Employee> = employeeService.delete(id)
 
     @GET
     fun getAll(): List<Employee> = employeeService.getAll()

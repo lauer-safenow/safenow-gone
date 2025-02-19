@@ -32,14 +32,14 @@ class Database {
                 from = LocalDate.now().minusDays(20),
                 to = LocalDate.now(),
                 takingEmployee = savedE1,
-                standInEmployee = savedE2,
+//                standInEmployee = savedE2,
             )
 
             val vacation2 = Vacation(
                 from = LocalDate.now(),
                 to = LocalDate.now().plusDays(10),
                 takingEmployee = savedE1,
-                standInEmployee = savedE2
+//                standInEmployee = savedE2
             )
 
 
@@ -52,6 +52,7 @@ class Database {
 
         }
 
+        fun deleteVacation(id: UUID): Boolean = vacationTable.remove(id) != null
 
         fun saveEmployee(employee: Employee): Employee {
             val copy = employee.copy(id = nextIdEmployee)
@@ -62,6 +63,7 @@ class Database {
 
         fun getEmployee(id: Int): Employee? = employeeTable[id]
         fun getEmployees(): List<Employee> = employeeTable.values.toList()
+        fun deleteEmployee(id: Int): Boolean = employeeTable.remove(id) != null
         fun getEmployeeByEmail(email: String): Employee? =
             employeeTable.values.let { e ->
                 e.find {

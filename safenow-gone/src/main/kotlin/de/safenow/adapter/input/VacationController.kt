@@ -5,6 +5,7 @@ import de.safenow.application.service.EmployeeService
 import de.safenow.application.service.VacationService
 import de.safenow.domain.Vacation
 import de.safenow.domain.VacationStatus
+import jakarta.ws.rs.DELETE
 import jakarta.ws.rs.GET
 import jakarta.ws.rs.PATCH
 import jakarta.ws.rs.POST
@@ -18,6 +19,10 @@ class VacationController() {
 
     private val vacations = VacationService()
     private val employeeService = EmployeeService()
+
+    @DELETE
+    @Path("/{id}")
+    fun deleteOne(id: UUID): Boolean = vacations.delete(id)
 
     @GET
     fun get(@QueryParam("from") from: String?, @QueryParam("to") to: String?): List<Vacation> {
@@ -59,8 +64,8 @@ class VacationController() {
             to = dto.to,
             takingEmployee = employeeService.get(dto.takingEmployeeId)
                 ?: throw IllegalArgumentException("Taking employee not found"),
-            standInEmployee = employeeService.get(dto.standInEmployeeId)
-                ?: throw IllegalArgumentException("Stand-in employee not found"),
+//            standInEmployee = employeeService.get(dto.standInEmployeeId)
+//                ?: throw IllegalArgumentException("Stand-in employee not found"),
             status = dto.status
         )
     }
@@ -71,7 +76,7 @@ class VacationController() {
         val from: LocalDate,
         val to: LocalDate,
         val takingEmployeeId: Int,
-        val standInEmployeeId: Int,
+//        val standInEmployeeId: Int,
         val status: VacationStatus
     )
 

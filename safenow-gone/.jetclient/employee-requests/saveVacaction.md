@@ -10,9 +10,8 @@ type = 'JSON'
 raw = '''
 {
   "from": "2025-04-22",
-  "to": "2025-05-02",
-  "takingEmployeeId": 2,
-  "standInEmployeeId": 1,
+  "to": "2025-04-23",
+  "takingEmployeeId": 1,
   "status": "PENDING"
 }'''
 ```

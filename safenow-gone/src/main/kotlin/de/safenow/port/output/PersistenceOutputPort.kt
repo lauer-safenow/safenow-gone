@@ -4,4 +4,5 @@ interface PersistenceOutputPort<ID,TYPE> {
     fun save(t: TYPE) : TYPE
     fun getById(id: ID): TYPE?
     fun getAll(): List<TYPE>
+    fun delete(id: ID): Boolean
 }

@@ -6,13 +6,14 @@ import de.safenow.domain.Vacation
 import de.safenow.domain.VacationStatus
 import de.safenow.domain.addAbsence
 import de.safenow.domain.updateStatus
+import de.safenow.port.input.vacation.DeleteVacationUsecase
 import de.safenow.port.input.vacation.GetVacationUsecase
 import de.safenow.port.input.vacation.SaveVacationUsecase
 import de.safenow.port.input.vacation.UpdateVacationUsecase
 import java.time.LocalDate
 import java.util.*
 
-class VacationService() : SaveVacationUsecase, GetVacationUsecase, UpdateVacationUsecase {
+class VacationService() : SaveVacationUsecase, GetVacationUsecase, UpdateVacationUsecase, DeleteVacationUsecase {
 
     private val persistenceOutputPort = VacationsPersistenceAdapter()
 
@@ -30,9 +31,10 @@ class VacationService() : SaveVacationUsecase, GetVacationUsecase, UpdateVacatio
 
     override fun getAll(): List<Vacation> = persistenceOutputPort.getAll()
 
-    override fun getWithRange(from: LocalDate, to: LocalDate?): List<Vacation> {
-        return persistenceOutputPort.getWithRange(from, to)
-    }
+    override fun getWithRange(from: LocalDate, to: LocalDate?): List<Vacation> =
+        persistenceOutputPort.getWithRange(from, to)
+
+    override fun delete(id: UUID): Boolean = persistenceOutputPort.delete(id)
 
 
 }
