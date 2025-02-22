@@ -2,15 +2,17 @@ package de.safenow.application.service
 
 
 import de.safenow.adapter.output.VacationsPersistenceAdapter
+import de.safenow.db.Database
+import de.safenow.domain.SomeException
 import de.safenow.domain.Vacation
 import de.safenow.domain.VacationStatus
 import de.safenow.domain.addAbsence
-import de.safenow.domain.removeAbsence
 import de.safenow.domain.updateStatus
 import de.safenow.port.input.vacation.DeleteVacationUsecase
 import de.safenow.port.input.vacation.GetVacationUsecase
 import de.safenow.port.input.vacation.SaveVacationUsecase
 import de.safenow.port.input.vacation.UpdateVacationUsecase
+import jakarta.transaction.Transactional
 import java.time.LocalDate
 import java.util.*
 
@@ -25,9 +27,15 @@ class VacationService() : SaveVacationUsecase, GetVacationUsecase, UpdateVacatio
     }
 
     override fun save(v: Vacation): Vacation {
-        //TODO persist the absence
-        v.takingEmployee.addAbsence(v)
-        return persistenceOutputPort.save(v)
+        // TODO persist the absence
+        // TODO why is it already persisted without persisting?????
+        val absenceAddedToEmployee = v.takingEmployee.addAbsence(v)
+        return if (absenceAddedToEmployee.first) {
+            employeeService.save(absenceAddedToEmployee.second)
+            persistenceOutputPort.save(v)
+        } else {
+            throw SomeException("Vacation could not be added for employee ${v.takingEmployee.email}")
+        }
     }
 
     override fun get(id: UUID): Vacation? = persistenceOutputPort.getById(id)
