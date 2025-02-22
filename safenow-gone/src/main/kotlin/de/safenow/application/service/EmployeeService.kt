@@ -7,7 +7,6 @@ import de.safenow.domain.removeAbsence
 import de.safenow.port.input.employee.DeleteEmployeeUsecase
 import de.safenow.port.input.employee.GetEmployeeUsecase
 import de.safenow.port.input.employee.SaveEmployeeUsecase
-import java.util.UUID
 
 class EmployeeService() : SaveEmployeeUsecase, GetEmployeeUsecase, DeleteEmployeeUsecase {
 

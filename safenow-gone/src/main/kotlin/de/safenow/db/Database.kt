@@ -1,5 +1,6 @@
 package de.safenow.db
 
+import com.sun.tools.javac.code.TypeAnnotationPosition.field
 import de.safenow.domain.Employee
 import de.safenow.domain.Vacation
 import de.safenow.domain.addAbsence
@@ -7,7 +8,9 @@ import java.time.LocalDate
 import java.util.*
 
 
+// this is lazy loaded
 class Database {
+
 
     companion object {
         val employeeTable: MutableMap<Int, Employee> = mutableMapOf()
@@ -36,18 +39,15 @@ class Database {
 
             savedE1.addAbsence(saveVacation(vacation))
             savedE1.addAbsence(saveVacation(vacation2))
-
-
-
-
         }
 
         fun deleteVacation(id: UUID): Boolean = vacationTable.remove(id) != null
 
         fun saveEmployee(employee: Employee): Employee {
             if(employee.id != null) {
-                employeeTable[employee.id] = employee.copy()
-                return employee
+                val copy = employee.copy()
+                employeeTable[employee.id] = copy
+                return copy
             }
 
             val copy = employee.copy(id = nextIdEmployee)
@@ -68,6 +68,12 @@ class Database {
 
 
         fun saveVacation(vacation: Vacation): Vacation {
+            if(vacation.id != null) {
+                val copy = vacation.copy()
+                vacationTable[vacation.id] = copy
+                return copy
+            }
+
             val id = vacation.id ?: UUID.randomUUID()
             val copy = vacation.copy(id = id, takingEmployee = vacation.takingEmployee.copy())
             vacationTable[copy.id!!] = copy
