@@ -1,6 +1,5 @@
 package de.safenow.db
 
-import com.sun.tools.javac.code.TypeAnnotationPosition.field
 import de.safenow.domain.Employee
 import de.safenow.domain.Vacation
 import de.safenow.domain.addAbsence
@@ -20,7 +19,7 @@ class Database {
 
         init {
             val savedE1 = saveEmployee(Employee(name = "Developer", email = "dev@b.c"))
-            val savedE2 = saveEmployee(Employee(name = "Manager", email = "manager@b.c"))
+            saveEmployee(Employee(name = "Manager", email = "manager@b.c"))
 
 
             val vacation = Vacation(

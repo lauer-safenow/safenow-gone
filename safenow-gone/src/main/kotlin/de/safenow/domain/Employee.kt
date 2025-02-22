@@ -1,6 +1,5 @@
 package de.safenow.domain
 
-import com.aayushatharva.brotli4j.common.annotations.Local
 import java.time.LocalDate
 
 data class Employee(

@@ -2,7 +2,10 @@ package de.safenow.application.service
 
 
 import de.safenow.adapter.output.VacationsPersistenceAdapter
-import de.safenow.domain.*
+import de.safenow.domain.Vacation
+import de.safenow.domain.VacationStatus
+import de.safenow.domain.addAbsence
+import de.safenow.domain.updateStatus
 import de.safenow.port.input.vacation.DeleteVacationUsecase
 import de.safenow.port.input.vacation.GetVacationUsecase
 import de.safenow.port.input.vacation.SaveVacationUsecase
