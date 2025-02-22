@@ -18,14 +18,19 @@ data class Absence(
 )
 
 
-fun Employee.removeAbsence(vacation: Vacation): Pair<Boolean, Employee> {
-    // TODO check if the absence is a vacation and is in the future
-    val wasAbsenceRemoved = this.absences.toMutableSet().removeIf { it.from == vacation.from && it.to == vacation.to }
+fun Employee.removeAbsence(vacation: Vacation): Employee {
+    // TODO check if the absence is a vacation and is in the future before removing
+    // dont remove past absences
+
+    val absences = this.absences.toMutableSet()
+    val wasAbsenceRemoved = absences.removeIf { it.from == vacation.from && it.to == vacation.to }
+
     if (wasAbsenceRemoved) {
         val newDaysTaken = vacation.from.until(vacation.to).days + 1 - this.daysTaken
-        return true to this.copy(daysTaken = newDaysTaken)
+        return this.copy(daysTaken = newDaysTaken, absences = absences)
     }
-    return false to this
+
+    throw SomeException("Absence not found for employee:${this.id} from:${vacation.from} to:${vacation.to}")
 }
 
 fun Employee.addAbsence(v: Vacation): Employee {

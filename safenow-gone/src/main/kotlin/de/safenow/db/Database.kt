@@ -23,27 +23,35 @@ class Database {
 
 
             val vacation = Vacation(
-                id = UUID.fromString("452c9a70-9b1d-4514-8bdb-9ab72f55a6e1"),
                 from = LocalDate.now().minusDays(20),
                 to = LocalDate.now(),
                 takingEmployee = savedE1,
             )
 
             val vacation2 = Vacation(
-                from = LocalDate.now(),
+                from = LocalDate.now().plusDays(1),
                 to = LocalDate.now().plusDays(10),
                 takingEmployee = savedE1,
             )
 
+            val saveVacation = saveVacation(vacation)
+            val saveVacation1 = saveVacation(vacation2)
 
-            savedE1.addAbsence(saveVacation(vacation))
-            savedE1.addAbsence(saveVacation(vacation2))
+            val empWithAbsence = savedE1.addAbsence(saveVacation)
+            val savedEmployee = saveEmployee(empWithAbsence)
+
+            val empWithAbsence1 = savedEmployee.addAbsence(saveVacation1)
+            saveEmployee(empWithAbsence1)
+
+
+
+
         }
 
         fun deleteVacation(id: UUID): Boolean = vacationTable.remove(id) != null
 
         fun saveEmployee(employee: Employee): Employee {
-            if(employee.id != null) {
+            if (employee.id != null) {
                 val copy = employee.copy()
                 employeeTable[employee.id] = copy
                 return copy
@@ -67,7 +75,7 @@ class Database {
 
 
         fun saveVacation(vacation: Vacation): Vacation {
-            if(vacation.id != null) {
+            if (vacation.id != null) {
                 val copy = vacation.copy()
                 vacationTable[vacation.id] = copy
                 return copy

@@ -16,17 +16,17 @@ enum class VacationStatus {
 }
 
 fun Vacation.approve(): Vacation {
-    this.takingEmployee.addAbsence(this)
+    this.takingEmployee.addAbsence(this)// TODO likely wrong
     return this.copy(status = VacationStatus.APPROVED)
 }
 
 fun Vacation.reject(): Vacation {
-    this.takingEmployee.removeAbsence(this)
+    this.takingEmployee.removeAbsence(this)// TODO likely wrong
     return this.copy(status = VacationStatus.REJECTED)
 }
 
 fun Vacation.cancel(): Vacation {
-    this.takingEmployee.removeAbsence(this)
+    this.takingEmployee.removeAbsence(this) // TODO likely wrong
     return this.copy(status = VacationStatus.CANCELLED)
 }
 
