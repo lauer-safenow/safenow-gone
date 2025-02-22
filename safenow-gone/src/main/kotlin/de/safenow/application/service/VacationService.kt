@@ -2,12 +2,7 @@ package de.safenow.application.service
 
 
 import de.safenow.adapter.output.VacationsPersistenceAdapter
-import de.safenow.db.Database
-import de.safenow.domain.SomeException
-import de.safenow.domain.Vacation
-import de.safenow.domain.VacationStatus
-import de.safenow.domain.addAbsence
-import de.safenow.domain.updateStatus
+import de.safenow.domain.*
 import de.safenow.port.input.vacation.DeleteVacationUsecase
 import de.safenow.port.input.vacation.GetVacationUsecase
 import de.safenow.port.input.vacation.SaveVacationUsecase
@@ -26,16 +21,11 @@ class VacationService() : SaveVacationUsecase, GetVacationUsecase, UpdateVacatio
         return persistenceOutputPort.save(v)
     }
 
+    @Transactional
     override fun save(v: Vacation): Vacation {
-        // TODO persist the absence
-        // TODO why is it already persisted without persisting?????
         val absenceAddedToEmployee = v.takingEmployee.addAbsence(v)
-        return if (absenceAddedToEmployee.first) {
-            employeeService.save(absenceAddedToEmployee.second)
-            persistenceOutputPort.save(v)
-        } else {
-            throw SomeException("Vacation could not be added for employee ${v.takingEmployee.email}")
-        }
+        employeeService.save(absenceAddedToEmployee)
+        return persistenceOutputPort.save(v)
     }
 
     override fun get(id: UUID): Vacation? = persistenceOutputPort.getById(id)
